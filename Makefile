@@ -45,7 +45,7 @@ getdeps:
 	@${REBAR} get-deps
 
 # Compiles.
-compile:
+compile: Emakefile
 	@${REBAR} compile
 
 # Dialyzer plt
@@ -134,3 +134,7 @@ cobertura: covertool
 # the coverage results on your browser.
 devtest: test
 	@open ${CT_LOG}/index.html
+
+Emakefile:
+	@find ${APP_DIR}/src -type d -exec perl -pe "s#__DIR__#{}#g" Emakefile.tmpl >> Emakefile \;
+
